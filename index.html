@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>JLPT Vocab</title> 
+</head>
+<body>
+
+<h1>JLPT Vocab</h1>
+<p id="question"></p>
+
+<label>答え: </label><br>
+<input type="text" id="inputText" value=""><br><br>
+<button type="button" onclick="check()">提出する</button>
+<button type="button" onclick="setVocab()">次へ</button>
+
+<p id="check"></p><br><br>
+<p id="meaning"></p>
+
+<p>Select local CSV File:</p>
+<input id="csv" type="file">
+<output id="out">
+    file contents will appear here
+</output>
+<p id="jsonout"></p>
+
+<script>
+var aString = "ころね";
+var csv = "N3VocabList_CSV.csv";
+var test = "";
+
+//readAsText method
+var fileInput = document.getElementById("csv"),
+
+    readFile = function () {
+        var reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('out').innerHTML = reader.result;
+        };
+        // start reading the file. When it is done, calls the onload event defined above.
+        reader.readAsBinaryString(fileInput.files[0]);
+		//reader.readAsText(fileInput);
+		//test = csvJSON(reader);
+    };
+
+fileInput.addEventListener('change', readFile);
+
+function setVocab() {
+  document.getElementById("question").innerHTML = aString;
+}
+
+function check() {
+  var answer = document.getElementById("inputText").value;
+  if (answer == aString) {
+    document.getElementById("check").innerHTML = "正解！";
+  } else {
+    document.getElementById("check").innerHTML = "Incorrect!";
+  }
+  document.getElementById("csv").innerHTML = csv;
+}
+
+//var csv is the CSV file with headers
+function csvJSON(csv){
+  var lines=csv.split("\n");
+  var result = [];
+  var headers=lines[0].split(",");
+
+  for(var i=1;i<lines.length;i++){
+	  var obj = {};
+	  var currentline=lines[i].split(",");
+	  for(var j=0;j<headers.length;j++){
+		  obj[headers[j]] = currentline[j];
+	  }
+	  result.push(obj);
+  }
+//return result; //JavaScript object
+  return JSON.stringify(result); //JSON
+}
+</script>
+
+</body>
+</html>
