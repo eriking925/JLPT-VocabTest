@@ -38,8 +38,8 @@ var fileInput = document.getElementById("csv"),
             document.getElementById('out').innerHTML = reader.result;
         };
         // start reading the file. When it is done, calls the onload event defined above.
-        reader.readAsBinaryString(fileInput.files[0]);
-		//reader.readAsText(fileInput);
+        //reader.readAsBinaryString(fileInput.files[0]);
+	    reader.readAsText(fileInput.files[0]);
 		//test = csvJSON(reader);
     };
 
