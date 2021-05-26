@@ -39,7 +39,7 @@ var fileInput = document.getElementById("csv"),
         };
         // start reading the file. When it is done, calls the onload event defined above.
 	    reader.readAsText(fileInput.files[0]);
-	    $.get(csv, function (data) {
+	    $.get("./resources/N3VocabList_CSVutf8.csv", function (data) {
 		var data = JSON.parse(csvJSON(data));
 		$(data).each(function (k, v) {
 		    console.log(v);
