@@ -27,7 +27,7 @@
 <script>
 var aString = "ころね";
 var csv = "N3VocabList_CSV.csv";
-var test = "";
+var testingData = "";
 
 //readAsText method
 var fileInput = document.getElementById("csv"),
@@ -40,7 +40,10 @@ var fileInput = document.getElementById("csv"),
         // start reading the file. When it is done, calls the onload event defined above.
         //reader.readAsBinaryString(fileInput.files[0]);
 	    reader.readAsText(fileInput.files[0]);
-		//test = csvJSON(reader);
+	    testingData = JSON.parse(csvJSON(reader));
+		$(data).each(function (k, v) {
+        	console.log(v);
+        })
     };
 
 fileInput.addEventListener('change', readFile);
