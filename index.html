@@ -40,7 +40,7 @@ var fileInput = document.getElementById("csv"),
         // start reading the file. When it is done, calls the onload event defined above.
         //reader.readAsBinaryString(fileInput.files[0]);
 	    reader.readAsText(fileInput.files[0]);
-	    testingData = JSON.parse(csvJSON(fileInput));
+	    testingData = JSON.parse(csvJSON(fileInput.files[0]));
 		$(testingData).each(function (k, v) {
         	console.log(v);
         })
