@@ -28,25 +28,20 @@
 var aString = "ころね";
 var csv = "./resources/N3VocabList_CSVutf8.csv";
 var testingData = "";
-
-//readAsText method
+var jsonData = {};
 var fileInput = document.getElementById("csv"),
 
+//readAsText method
     readFile = function () {
         var reader = new FileReader();
         reader.onload = function () {
             document.getElementById('out').innerHTML = reader.result;
         };
         // start reading the file. When it is done, calls the onload event defined above.
-	    reader.readAsText(fileInput.files[0]);
-	    $.get("./resources/N3VocabList_CSVutf8.csv", function (data) {
-		var data = JSON.parse(csvJSON(data));
-		$(data).each(function (k, v) {
-		    console.log(v);
-		})
-            })
+	    testingData = reader.readAsText(fileInput.files[0]);
+		jsonData = csvJSON(testingData);
+		document.getElementById("meaning").innerHTML = jsonData;
     };
-
 fileInput.addEventListener('change', readFile);
 
 function setVocab() {
@@ -58,7 +53,7 @@ function check() {
   if (answer == aString) {
     document.getElementById("check").innerHTML = "正解！";
   } else {
-    document.getElementById("check").innerHTML = "Incorrect!";
+    document.getElementById("check").innerHTML = "不正解！";
   }
   document.getElementById("csv").innerHTML = csv;
 }
@@ -77,7 +72,7 @@ function csvJSON(csv){
 	  }
 	  result.push(obj);
   }
-//return result; //JavaScript object
+  //return result; //JavaScript object
   return JSON.stringify(result); //JSON
 }
 </script>
